@@ -1,48 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Fresher Budget Calculator</title>
-  <link href="style.css" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyBudgetPal</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
-    <img src="assets/logo.png" alt="Logo" class="logo" />
-    <h1>Fresher Budget Calculator</h1>
+    <header>
+      <img src="assets/logo.png" alt="MyBudgetPal Logo" class="logo">
+      <h1>MyBudgetPal</h1>
+    </header>
 
-    <label>Monthly Salary (INR)</label>
-    <input type="number" id="salary" />
+    <section class="budget-section">
+      <h2>Monthly Budget Planner</h2>
+      <input type="number" id="salary" placeholder="Enter Monthly Salary">
+      <input type="number" id="rent" placeholder="Rent">
+      <input type="number" id="food" placeholder="Food">
+      <input type="number" id="travel" placeholder="Travel">
+      <input type="number" id="other" placeholder="Other Expenses">
+      <input type="number" id="savings" placeholder="Savings Goal">
+      <button onclick="calculateBudget()">Calculate</button>
+      <div id="result"></div>
+      <canvas id="budgetChart"></canvas>
+    </section>
 
-    <label>Rent</label>
-    <input type="number" id="rent" />
+    <section class="daily-expense-section">
+      <h2>Daily Expense Tracker</h2>
+      <input type="text" id="expense-desc" placeholder="Description">
+      <input type="number" id="expense-amount" placeholder="Amount">
+      <button onclick="addExpense()">Add Expense</button>
+      <ul id="expense-list"></ul>
+    </section>
 
-    <label>Groceries & Food</label>
-    <input type="number" id="food" />
+    <section class="notes-section">
+      <h2>Notes</h2>
+      <textarea id="note-input" placeholder="Write your note..."></textarea>
+      <button onclick="saveNote()">Save Note</button>
+      <ul id="notes-list"></ul>
+    </section>
 
-    <label>Travel</label>
-    <input type="number" id="travel" />
-
-    <label>Utilities</label>
-    <input type="number" id="utilities" />
-
-    <label>Subscriptions</label>
-    <input type="number" id="subscriptions" />
-
-    <label>Miscellaneous</label>
-    <input type="number" id="misc" />
-
-    <label>Target Savings</label>
-    <input type="number" id="savings" />
-
-    <button onclick="calculateBudget()">Calculate</button>
-
-    <div class="results" id="results"></div>
-    <canvas id="budgetChart" width="400" height="200"></canvas>
+    <section class="reminder-section">
+      <h2>Reminders</h2>
+      <input type="text" id="reminder-text" placeholder="Reminder">
+      <input type="datetime-local" id="reminder-time">
+      <button onclick="addReminder()">Add Reminder</button>
+      <ul id="reminder-list"></ul>
+    </section>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
