@@ -16,5 +16,5 @@ A dark-themed responsive budget calculator for freshers living outside their hom
 ## 🚀 How to Run
 1. Clone the repo
 ```bash
-git clone https://github.com/your-username/fresher-budget-calculator.git
+git clone https://aryanraj7777.github.io/MyBudgetPal/
 cd fresher-budget-calculator
