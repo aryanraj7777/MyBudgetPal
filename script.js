@@ -1,68 +1,48 @@
 function calculateBudget() {
-  const salary = parseFloat(document.getElementById("salary").value);
-  const rent = parseFloat(document.getElementById("rent").value);
-  const food = parseFloat(document.getElementById("food").value);
-  const travel = parseFloat(document.getElementById("travel").value);
-  const utilities = parseFloat(document.getElementById("utilities").value);
-  const subscriptions = parseFloat(document.getElementById("subscriptions").value);
-  const misc = parseFloat(document.getElementById("misc").value);
-  const savings = parseFloat(document.getElementById("savings").value);
+  const salary = parseFloat(document.getElementById('salary').value);
+  const rent = parseFloat(document.getElementById('rent').value);
+  const food = parseFloat(document.getElementById('food').value);
+  const travel = parseFloat(document.getElementById('travel').value);
+  const other = parseFloat(document.getElementById('other').value);
+  const savings = parseFloat(document.getElementById('savings').value);
 
-  const totalExpense = rent + food + travel + utilities + subscriptions + misc;
-  const balance = salary - totalExpense - savings;
+  const totalExpenses = rent + food + travel + other + savings;
+  const balance = salary - totalExpenses;
 
-  let resultText = `
-    <p><strong>Total Expenses:</strong> ₹${totalExpense.toFixed(2)}</p>
-    <p><strong>Savings Goal:</strong> ₹${savings.toFixed(2)}</p>
-    <p><strong>Remaining Balance:</strong> ₹${balance.toFixed(2)}</p>
-  `;
+  document.getElementById('result').innerHTML = `Remaining Balance: ₹${balance}`;
 
-  if (balance < 0) {
-    resultText += `<p style="color: red;"><strong>Warning:</strong> Expenses exceed your salary!</p>`;
-  }
-
-  document.getElementById("results").innerHTML = resultText;
-
-  const ctx = document.getElementById("budgetChart").getContext("2d");
-  if (window.budgetChart) window.budgetChart.destroy();
-
-  window.budgetChart = new Chart(ctx, {
-    type: "pie",
+  const ctx = document.getElementById('budgetChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'pie',
     data: {
-      labels: ["Rent", "Food", "Travel", "Utilities", "Subscriptions", "Misc", "Savings", "Balance"],
-      datasets: [
-        {
-          data: [
-            rent,
-            food,
-            travel,
-            utilities,
-            subscriptions,
-            misc,
-            savings,
-            balance > 0 ? balance : 0
-          ],
-          backgroundColor: [
-            "#00ffff",
-            "#1abc9c",
-            "#3498db",
-            "#9b59b6",
-            "#f1c40f",
-            "#e67e22",
-            "#2ecc71",
-            "#34495e"
-          ]
-        }
-      ]
-    },
-    options: {
-      plugins: {
-        legend: {
-          labels: {
-            color: "#fff"
-          }
-        }
-      }
+      labels: ['Rent', 'Food', 'Travel', 'Other', 'Savings'],
+      datasets: [{
+        data: [rent, food, travel, other, savings],
+        backgroundColor: ['#ff6384', '#36a2eb', '#ffcd56', '#4bc0c0', '#9966ff']
+      }]
     }
   });
+}
+
+function addExpense() {
+  const desc = document.getElementById('expense-desc').value;
+  const amount = document.getElementById('expense-amount').value;
+  const li = document.createElement('li');
+  li.textContent = `${desc}: ₹${amount}`;
+  document.getElementById('expense-list').appendChild(li);
+}
+
+function saveNote() {
+  const note = document.getElementById('note-input').value;
+  const li = document.createElement('li');
+  li.textContent = note;
+  document.getElementById('notes-list').appendChild(li);
+}
+
+function addReminder() {
+  const text = document.getElementById('reminder-text').value;
+  const time = document.getElementById('reminder-time').value;
+  const li = document.createElement('li');
+  li.textContent = `${text} at ${new Date(time).toLocaleString()}`;
+  document.getElementById('reminder-list').appendChild(li);
 }
